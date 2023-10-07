@@ -6,7 +6,7 @@ struct SampleableWrapper<T>(T) where T: wavedata::sampling::Sampleable + wavedat
 
 impl<T> wavedata::sampling::Sampleable for SampleableWrapper<T> 
     where T: wavedata::sampling::Sampleable + wavedata::waves::Wave {
-    fn sample_into_f32(&self, out: &mut [f32], rate: wavedata::sampling::SamplingRate) -> wavedata::waves::Time {
+    fn sample_into_f32(&self, out: &mut [f32], rate: wavedata::sampling::SamplingRate) -> wavedata::units::Time {
         self.0.sample_into_f32(out, rate)    
     }
 }
@@ -34,9 +34,9 @@ fn main() {
 
     let device = audio_subsystem.open_playback(None, &audio_specification, |_spec| {
         SampleableWrapper(wavedata::waves::Sine::new(
-            wavedata::waves::Frequency::new(100.0),
-            wavedata::waves::Time::zero(),
-            wavedata::waves::Amplitude::new(1.0)
+            wavedata::units::Frequency::new(100.0),
+            wavedata::units::Time::zero(),
+            wavedata::units::Amplitude::new(1.0)
         ))
     }).unwrap();
 
