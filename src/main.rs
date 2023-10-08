@@ -41,14 +41,14 @@ fn main() {
 
     let device_constructor = |_spec| {
         let carrier_signal = wavedata::sampling::WaveSampler::new(wavedata::waves::Sine::new(
-            Frequency::new(512.0),
+            Frequency::new(20000.0),
             Time::zero(),
             Amplitude::new(1.0),
         ));
         let data_signal = wavedata::sampling::SignalSampler::new(wavedata::signals::am::NRZ::new(
             wavedata::signals::am::NRZConsts::new(
-                Frequency::new(16.0),
-                Proportion::new(0.1),
+                Frequency::new(10.0),
+                Proportion::new(0.25),
                 (Amplitude::new(1.0), Amplitude::new(0.0)),
             ),
             wavedata::enc::nrz::Parameters::new(
@@ -77,5 +77,5 @@ fn main() {
 
     device.resume();
 
-    std::thread::sleep(std::time::Duration::from_millis(20000));
+    std::thread::sleep(std::time::Duration::from_millis(15000));
 }
