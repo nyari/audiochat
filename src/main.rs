@@ -12,7 +12,11 @@ impl<T> wavedata::sampling::Sampleable for SampleableWrapper<T>
 where
     T: wavedata::sampling::Sampleable,
 {
-    fn sample_into_f32(&mut self, out: &mut [f32], rate: wavedata::sampling::SamplingRate) {
+    fn sample_into_f32(
+        &mut self,
+        out: wavedata::sampling::SamplesMut,
+        rate: wavedata::sampling::SamplingRate,
+    ) {
         self.0.sample_into_f32(out, rate)
     }
 }
@@ -24,8 +28,10 @@ where
     type Channel = f32;
 
     fn callback(&mut self, out: &mut [Self::Channel]) {
-        self.0
-            .sample_into_f32(out, wavedata::sampling::SamplingRate::new(44100));
+        self.0.sample_into_f32(
+            wavedata::sampling::SamplesMut(out),
+            wavedata::sampling::SamplingRate::new(44100),
+        );
     }
 }
 
