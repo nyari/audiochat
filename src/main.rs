@@ -45,21 +45,22 @@ fn main() {
             Time::zero(),
             Amplitude::new(1.0),
         ));
-        let data_signal = wavedata::sampling::SignalSampler::new(wavedata::signals::am::NRZ::new(
-            wavedata::signals::am::NRZConsts::new(
-                Frequency::new(10.0),
-                Proportion::new(0.25),
-                (Amplitude::new(1.0), Amplitude::new(0.0)),
-            ),
-            wavedata::encodings::enc::nrz::Parameters::new(
-                "Nagyon szeretlek angyalom <3 <3 <3"
-                    .as_bytes()
-                    .iter()
-                    .map(|x| x.clone())
-                    .collect(),
-                4,
-            ),
-        ));
+        let data_signal =
+            wavedata::sampling::SignalSampler::new(wavedata::signals::enc::am::NRZ::new(
+                wavedata::signals::enc::am::NRZConsts::new(
+                    Frequency::new(10.0),
+                    Proportion::new(0.25),
+                    (Amplitude::new(1.0), Amplitude::new(0.0)),
+                ),
+                wavedata::encodings::enc::nrz::Parameters::new(
+                    "Nagyon szeretlek angyalom <3 <3 <3"
+                        .as_bytes()
+                        .iter()
+                        .map(|x| x.clone())
+                        .collect(),
+                    4,
+                ),
+            ));
         let composite_sampler = wavedata::sampling::CompositeSampler::new(
             carrier_signal,
             data_signal,
