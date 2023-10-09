@@ -51,7 +51,7 @@ fn main() {
                 Proportion::new(0.25),
                 (Amplitude::new(1.0), Amplitude::new(0.0)),
             ),
-            wavedata::enc::nrz::Parameters::new(
+            wavedata::encodings::enc::nrz::Parameters::new(
                 "Nagyon szeretlek angyalom <3 <3 <3"
                     .as_bytes()
                     .iter()
